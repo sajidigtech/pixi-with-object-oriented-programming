@@ -7,6 +7,7 @@ import { LoadingScene } from "./ui/LoadingScreen";
 import { AssetLoader } from "./loader/AssetLoader";
 
 import { GameScreen } from "./ui/GameScreen";
+import { Player } from "./ui/PlayerRunningScreen";
 
 
 
@@ -18,6 +19,8 @@ class Game{
   app!:Application
   loadingScreen !: LoadingScene
   gameScreen !:GameScreen
+
+  playerscreen !:Player
 
    async init(){
 
@@ -65,9 +68,16 @@ class Game{
   }
 
 
-  showGameScreen(){
+  async showGameScreen(){
     this.gameScreen = new GameScreen(this.app);
-    this.app.stage.addChild(this.gameScreen)
+    this.app.stage.addChild(this.gameScreen);
+
+    // this.playerscreen = new Player(this.app);
+    // await this.playerscreen.initPlayer();
+    // this.app.stage.addChild(this.playerscreen)
+
+    // below 3 lines do not remove them 
+
   } 
 
 

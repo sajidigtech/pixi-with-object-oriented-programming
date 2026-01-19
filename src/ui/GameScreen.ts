@@ -8,9 +8,7 @@ import { FishType } from "../scripts/types";
 export class GameScreen extends Container {
 
     app!: Application
-
-
-
+    
     bg !: Graphics
 
     overlay_texture !: Texture
@@ -22,6 +20,8 @@ export class GameScreen extends Container {
     fish3 !: Sprite
     fish4 !: Sprite
     fish5 !: Sprite
+
+    bigFish !: Sprite
 
     waveOverlay !: Sprite
 
@@ -100,6 +100,8 @@ export class GameScreen extends Container {
         this.waveOverlay = Sprite.from(globalAsset["wave_overlay.png"]);
         this.displacementMap = Sprite.from(globalAsset["displacement_map.png"]);
         this.pondBackground = Sprite.from(globalAsset["pond_background.jpg"]);
+
+        this.bigFish = Sprite.from(globalAsset["bigfish.png"])
         
     }
 
@@ -132,6 +134,12 @@ export class GameScreen extends Container {
     // }
 
     addFishes() {
+
+        // load big fish on screen top left corner 
+
+        // this.addChild(this.bigFish)
+        // this.bigFish.anchor.set(0.5)
+        // this.bigFish.position.set(50, this.app.screen.height -40)
         this.fishCount = 50;
 
         this.fishTextures = [
