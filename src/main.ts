@@ -68,7 +68,7 @@ class Game{
   showGameScreen(){
     this.gameScreen = new GameScreen(this.app);
     this.app.stage.addChild(this.gameScreen)
-  }
+  } 
 
 
   
