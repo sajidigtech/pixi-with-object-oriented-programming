@@ -16,6 +16,7 @@ import { Player } from "./ui/PlayerRunningScreen";
 class Game{
 
   assetloader !: AssetLoader;
+  // this is the example of composition 
   app!:Application
   loadingScreen !: LoadingScene
   gameScreen !:GameScreen
