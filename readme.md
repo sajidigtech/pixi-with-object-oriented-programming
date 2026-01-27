@@ -13,3 +13,6 @@ we can also use spritesheet using Spritesheet(texture,atlas) way for accessing a
 // check file : -> src/ui/PlayerRunningScreen.ts
 // this could be the way for accessing spritesheet in case of oop. 
 // will try checking ludo screen too via globals
+
+
+// understanding of assetloading via global state is important ! 
