@@ -6,16 +6,19 @@ export class AssetLoader {
     // object format 
     async loadAll()  {
         // Import all images + JSON from src/assets
-        const modules = import.meta.glob("../assets/*.{png,jpg,jpeg,webp,json}", { eager: true });
+        const modules = import.meta.glob("../assets/*.{png,jpg,jpeg,webp,json,xml}", { eager: true });
 
         console.log("sabse pehele module dekho ->", modules)
 
         // Loop through each module and assign to globalAsset
         for (const path in modules) {
+            
 
             console.log("")
             const fileName = path.split("/").pop()!; // "fish1.png" or "cards.json"
             const mod = modules[path] as any;
+
+            const url = mod.default || mod;
 
             console.log("dekho ab mod kya hai : ", mod.default)
             
@@ -24,7 +27,10 @@ export class AssetLoader {
                 globalAsset[fileName] = mod.default || mod;
             }
 
-            
+            else if (fileName.endsWith(".xml")) {
+        const font = await Assets.load(url); // bitmap font
+        globalAsset[fileName] = font;
+      } 
             
             else {
                 const texture = await Assets.load(mod.default);

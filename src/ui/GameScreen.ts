@@ -1,5 +1,6 @@
 import { globalAsset } from "../loader/globalAssets";
 import { Application, Container, Graphics, Sprite, Texture, Ticker, TilingSprite } from "pixi.js";
+import { TextData } from "./TextScreen";
 
 import { FishType } from "../scripts/types";
 
@@ -8,12 +9,13 @@ import { FishType } from "../scripts/types";
 export class GameScreen extends Container {
 
     app!: Application
+    textLayer!: TextData;
+    fishkill :number = 0
     
     bg !: Graphics
 
     overlay_texture !: Texture
     overlayTilingSprite!: TilingSprite
-
 
     fish1 !: Sprite
     fish2 !: Sprite
@@ -66,6 +68,7 @@ export class GameScreen extends Container {
         this.pondBackground.position.set(0, 0);
 
         this.addChild(this.pondBackground);
+        
 
         this.overlay_texture = globalAsset["wave_overlay.png"];
         this.overlayTilingSprite = new TilingSprite(
@@ -81,11 +84,16 @@ export class GameScreen extends Container {
         //     this.overlayTilingSprite.tilePosition.y -= 2; // vertically move
         // });
 
+        
+
         this.addFishes()
 
 
         this.startAnimation();
-        this.handleRemoveFish()
+        this.handleRemoveFish();
+
+        this.textLayer = new TextData(this.app);
+        this.addChild(this.textLayer);
 
 
     }
@@ -225,7 +233,11 @@ export class GameScreen extends Container {
         for (const fish of this.fishes) {
             fish.eventMode = 'static';
             fish.cursor = "pointer"
-            fish.on("mousedown", () => {
+            fish.on("pointerdown", () => {
+                this.fishkill+=1;
+
+
+                this.textLayer.updateScore(this.fishkill);
 
                 this.removeChild(fish);
                 console.log("fish removed : ", fish.label)
@@ -233,14 +245,6 @@ export class GameScreen extends Container {
             })
         }
     }
-
-
-
-
-
-
-
-
 
 }
 
